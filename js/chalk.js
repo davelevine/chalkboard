@@ -51,6 +51,22 @@ function chalkboard(){
             }
         }
     }, false);
+
+	document.addEventListener('touchmove', function(evt) {
+    var touch1 = evt.touches[0];
+    var touch2 = evt.touches[1];
+    if (touch1 && touch2) {
+        evt.preventDefault();
+        var rect = canvas.getBoundingClientRect();
+        var eraserX1 = touch1.clientX - rect.left - (eraserWidth / 4);
+        var eraserY1 = touch1.clientY - rect.top - (eraserHeight / 4);
+        var eraserX2 = touch2.clientX - rect.left - (eraserWidth / 4);
+        var eraserY2 = touch2.clientY - rect.top - (eraserHeight / 4);
+        erase(eraserX1, eraserY1, eraserWidth, eraserHeight);
+        erase(eraserX2, eraserY2, eraserWidth, eraserHeight);
+    }
+}, false);
+
     document.addEventListener('touchstart', function(evt) {
         //evt.preventDefault();
         var touch = evt.touches[0];
